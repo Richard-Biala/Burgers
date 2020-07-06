@@ -16,7 +16,17 @@ const burger = {
             console.log('HEY IM IN BURGER: ', resultsData);
         });
     },
-    updateOne: function () { }
+    updateOne: function (updateData) {
+
+        const condition = `id=${updateData.id}`;
+        delete updateData.id;
+
+        console.log('burgers updated data: ', updateData);
+
+        orm.updateOne("burgers", updateData, condition, function (resultsData) {
+            callbackFunction(resultsData);
+        });
+    }
 }
 
 module.exports = burger;

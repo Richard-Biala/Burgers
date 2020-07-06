@@ -12,18 +12,20 @@ function generateQuestionMarks(number) {
 
 function convertObjectToSQL(obj) {
     const array = [];
-    for (keys in obj) {
+    for (let keys in obj) {
         console.log('keys: ', keys);
         console.log(obj[keys]);
 
         array.push(`${keys}=${obj[keys]}`);
     }
 
+    var temp = array.toString();
+
     return array.toString();
 }
 
 var data = convertObjectToSQL({
-    "burger_name": "asdasdasd",
+    burger_name: "asdasdasd",
     devoured: true
 });
 
@@ -55,14 +57,23 @@ const orm = {
         });
         // console.log(callbackFunction);
     },
-    updateOne: function (tableName, values) {
+    updateOne: function (tableName, values, condition) {
         const data = {
             burger_name: "asdasdasd",
             devoured: true
         }
 
         // const queryString = `UPDATE tableName SET columns WHERE id=aNumber`
-        const queryString = `UPDATE ${tableName} SET ${convertObjectToSQL(values)}`;
+        const queryString = `UPDATE ${tableName} SET ${convertObjectToSQL(values)} WHERE ${condition}`;
+
+        connection.query(queryString, function (err, results, callbackFunction) {
+            if (err) {
+                throw err;
+            }
+
+            console.log('org results: ', results);
+            callbackFunction(results);
+        })
     }
 }
 
