@@ -21,6 +21,7 @@ app.set("view engine", 'handlebars');
 //for our controller routes
 //or api routes
 app.use(burgerController);
+app.use(htmlRoutes);
 
 app.listen(PORT, function () {
     console.log(`PORT IS LISTENING ON ${PORT}`);
