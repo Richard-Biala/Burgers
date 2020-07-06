@@ -10,6 +10,24 @@ function generateQuestionMarks(number) {
     return array.toString();
 }
 
+function convertObjectToSQL(obj) {
+    const array = [];
+    for (keys in obj) {
+        console.log('keys: ', keys);
+        console.log(obj[keys]);
+
+        array.push(`${keys}=${obj[keys]}`);
+    }
+
+    return array.toString();
+}
+
+var data = convertObjectToSQL({
+    "burger_name": "asdasdasd",
+    devoured: true
+});
+
+console.log("string test bitch: ", data);
 
 const orm = {
     findAll: function (tableName, callbackFunction) {
@@ -37,7 +55,15 @@ const orm = {
         });
         // console.log(callbackFunction);
     },
-    updateOne: function () { }
+    updateOne: function (tableName, values) {
+        const data = {
+            burger_name: "asdasdasd",
+            devoured: true
+        }
+
+        // const queryString = `UPDATE tableName SET columns WHERE id=aNumber`
+        const queryString = `UPDATE ${tableName} SET ${convertObjectToSQL(values)}`;
+    }
 }
 
 // o
