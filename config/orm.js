@@ -25,7 +25,7 @@ function convertObjectToSQL(obj) {
 }
 
 var data = convertObjectToSQL({
-    burger_name: "asdasdasd",
+    "burger_name": "asdasdasd",
     devoured: true
 });
 
