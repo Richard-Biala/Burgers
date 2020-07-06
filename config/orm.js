@@ -12,7 +12,17 @@ function generateQuestionMarks(number) {
 
 
 const orm = {
-    findAll: function () { },
+    findAll: function (tableName, callbackFunction) {
+        const queryString = `SELECT * FROM ${tableName}`;
+
+        connection.query(queryString, function (err, results) {
+            if (err) {
+                throw err;
+            }
+
+            callbackFunction(results);
+        })
+    },
     createOne: function (tableName, columns, values, callbackFunction) {
         // const queryString = `INSERT INTO ${tableName} (burger_name, devoured) VALUES (?,?)`;
 

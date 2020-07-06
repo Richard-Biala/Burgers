@@ -4,9 +4,13 @@ const app = require("express").Router();
 const burger = require('../models/burgers');
 
 
-app.get("/api/burgers", function (req, res) { });
+app.get("/api/burgers", function (req, res) {
+    burger.findAll(function (results) {
+        res.json(results);
+    })
+});
 app.post("/api/burgers", function (req, res) {
-    burger.createOne(function (results) {
+    burger.createOne(req.body, function (results) {
         res.json(results);
     })
 });

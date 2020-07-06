@@ -1,10 +1,14 @@
 const orm = require("../config/orm");
 
 const burger = {
-    findAll: function () { },
-    createOne: function (callbackFunction) {
+    findAll: function (callbackFunction) {
+        orm.findAll("burgers", function (resultsData) {
+            callbackFunction(resultsData);
+        })
+    },
+    createOne: function (createData, callbackFunction) {
         const columns = ["burger_name", "devoured"];
-        const values = ['poop burger', false];
+        const values = [createData.burger_name, createData.devoured];
 
         orm.createOne("burgers", columns, values, function (resultsData) {
             callbackFunction(resultsData);
