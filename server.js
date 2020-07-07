@@ -4,7 +4,7 @@ const exphbs = require("express-handlebars")
 const PORT = process.env.PORT || 3000;
 
 const burgerController = require('./controller/burgerController');
-const htmlRoutes = require('./routes');
+const htmlRoutes = require('./routes/index.js');
 
 const app = express();
 

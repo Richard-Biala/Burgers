@@ -8,8 +8,11 @@ const connection = mysql.createConnection({
     database: 'burgers_db'
 });
 
-connection.connect((err) => {
-    if (err) throw err;
+connection.connect(function (err) {
+    if (err) {
+        return consle.error('error: ' + err.message);
+    }
+
     console.log('Connected!');
 });
 

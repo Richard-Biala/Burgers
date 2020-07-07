@@ -1,15 +1,17 @@
 $(document).ready(function () {
 
-    $("#burger-submit").on("click", function (e) {
+    $('#burger-submit').on('click', function (e) {
 
         e.preventDefault();
 
         const burgerObj = {
-            burger_name: $("#burger-name").val().trim(),
+            burger_name: $('#burger-name')
+                .val()
+                .trim(),
             devoured: 0
         }
         $.ajax({
-            url: 'api/burgers',
+            url: '/api/burgers',
             method: 'POST',
             data: burgerObj
         }).then(function (response) {
@@ -28,8 +30,8 @@ $(document).ready(function () {
         };
 
         $.ajax({
-            url: 'api/burgers',
-            method: 'PUT',
+            url: "/api/burgers",
+            method: "PUT",
             data: burgerObj
         }).then(function (response) {
             console.log(response);
