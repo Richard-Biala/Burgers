@@ -5,7 +5,8 @@ const burger = require("../models/burgers");
 app.get("/", function (req, res) {
 
     burger.findAll(function (results) {
-        res.render("index", { hbObj: results });
+        console.log(results);
+        res.render("index", { hbobj: results });
     })
 
 })

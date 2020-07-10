@@ -16,14 +16,15 @@ const burger = {
             console.log('HEY IM IN BURGER: ', resultsData);
         });
     },
-    updateOne: function (updateData) {
+    updateOne: function (updateData, callbackFunction) {
 
         const condition = `id=${updateData.id}`;
+
         delete updateData.id;
 
         console.log('burgers updated data: ', updateData);
 
-        orm.updateOne("burgers", updateData, condition, function (resultsData) {
+        orm.updateOne(updateData, condition, function (resultsData) {
             callbackFunction(resultsData);
         });
     }

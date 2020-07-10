@@ -1,5 +1,27 @@
 const connection = require("./connection");
 
+function objToSql(ob) {
+    var arr = [];
+
+    // loop through the keys and push the key/value as a string int arr
+    for (var key in ob) {
+        var value = ob[key];
+        // check to skip hidden properties
+        if (Object.hasOwnProperty.call(ob, key)) {
+            // if string with spaces, add quotations (Lana Del Grey => 'Lana Del Grey')
+            if (typeof value === "string" && value.indexOf(" ") >= 0) {
+                value = "'" + value + "'";
+            }
+            // e.g. {name: 'Lana Del Grey'} => ["name='Lana Del Grey'"]
+            // e.g. {sleepy: true} => ["sleepy=true"]
+            arr.push(key + "=" + value);
+        }
+    }
+
+    // translate array of strings to a single comma-separated string
+    return arr.toString();
+}
+
 function generateQuestionMarks(number) {
     const array = [];
 
@@ -57,16 +79,17 @@ const orm = {
         });
         // console.log(callbackFunction);
     },
-    updateOne: function (tableName, values, condition) {
+    updateOne: function (updateData, condition, callbackFunction) {
         const data = {
             burger_name: "asdasdasd",
             devoured: true
         };
 
+        console.log("\n\n\n\n", updateData, condition);
         // const queryString = `UPDATE tableName SET columns WHERE id=aNumber`
-        const queryString = `UPDATE ${tableName} SET ${convertObjectToSQL(values)} WHERE ${condition}`;
+        const queryString = `UPDATE burgers SET ${convertObjectToSQL(updateData)} WHERE ${condition}`;
 
-        connection.query(queryString, function (err, results, callbackFunction) {
+        connection.query(queryString, function (err, results) {
             if (err) {
                 throw err;
             }

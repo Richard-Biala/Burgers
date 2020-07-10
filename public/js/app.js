@@ -10,6 +10,7 @@ $(document).ready(function () {
                 .trim(),
             devoured: 0
         }
+        console.log(burgerObj);
         $.ajax({
             url: '/api/burgers',
             method: 'POST',
